@@ -2,10 +2,13 @@
 import axios from "axios";
 import { useEffect, useState} from "react";
 import Link from "next/link";
+import { useRouter } from 'next/navigation'
+import {useTokenStore} from './context/auth'
 import { setTimeout } from "timers";
 export default function Home() {
 
-
+  const addToken = useTokenStore(state => state.setToken)
+  const router = useRouter()
   const [correta, setCorreta] = useState(false)             /*Senha Correta*/
 
   const [incorreta, setIncorreta] = useState(false)         /*Senha Incorreta*/
@@ -41,7 +44,7 @@ export default function Home() {
     setLogin(false)
   }
 
-  const handleChange = (e: any, formType) => {
+  const handleChange = (e: any, formType : string) => {
     const { name, value } = e.target;
     if (formType === "login") {
       setEntrar({ ...entrar, [name]: value });
@@ -61,19 +64,26 @@ export default function Home() {
     }
   };
 
+
   const loginSubmit = async (e: any) => {
     e.preventDefault();
+    console.log(entrar)
     try {
       const response = await axios.post('https://interview.t-alpha.com.br/api/auth/login', entrar);
 
+      const newToken =  response.data.data.token;
       console.log(response.data.data.token);
       
+      addToken(newToken)
 
-      if (response.data.success == true) {
+      if (response.data.success === true) {
         setCorreta(true)
+        
         setTimeout(() => {
           setCorreta(false)
+          router.push('/Crud')
         }, 3000)
+        
       } else {
         window.prompt('deu errado');
       }
@@ -99,13 +109,13 @@ export default function Home() {
               <div>
                 <div className="mb-4">
                   <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="text">
-                    Nome
+                  Tax Number
                   </label>
                   <input className="text-black block border border-gray-300 rounded py-2 px-3 mb-3" type="text" name="taxNumber" value={entrar.taxNumber} onChange={(e) => handleChange(e, "login")} placeholder="Nome" required />
                 </div>
                 <div className="mb-4">
                   <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="senha">
-                    Tax Number
+                    Senha
                   </label>
                   <input className="text-black block border border-gray-300 rounded py-2 px-3 mb-3" type="password" name="password" value={entrar.password} onChange={(e) => handleChange(e, "login")} placeholder="Tax Number" required />
                   {correta &&
@@ -121,7 +131,7 @@ export default function Home() {
                   Login
                 </button>
                 <div className="text-end">
-                  <button onClick={registroIr} className=" font-semibold text-red-400 hover:text-red-800 transition-all" href="a">Registrar-se</button>
+                  <button onClick={registroIr} className=" font-semibold text-red-400 hover:text-red-800 transition-all">Registrar-se</button>
                 </div>
 
               </div>
@@ -167,7 +177,7 @@ export default function Home() {
                   </button>
                 </div>
                 <div className="text-end">
-                  <button onClick={loginIr} className="font-semibold text-red-400 hover:text-red-800 transition-all" href="">Ir para o login</button>
+                  <button onClick={loginIr} className="font-semibold text-red-400 hover:text-red-800 transition-all">Ir para o login</button>
                 </div>
 
               </div>
