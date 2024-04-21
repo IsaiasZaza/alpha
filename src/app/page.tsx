@@ -1,9 +1,9 @@
 "use client"
 import axios from "axios";
-import { useEffect, useState} from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter } from 'next/navigation'
-import {useTokenStore} from './context/auth'
+import { useTokenStore } from '../context/auth'
 import { setTimeout } from "timers";
 export default function Home() {
 
@@ -44,7 +44,7 @@ export default function Home() {
     setLogin(false)
   }
 
-  const handleChange = (e: any, formType : string) => {
+  const handleChange = (e: any, formType: string) => {
     const { name, value } = e.target;
     if (formType === "login") {
       setEntrar({ ...entrar, [name]: value });
@@ -58,7 +58,6 @@ export default function Home() {
     e.preventDefault();
     try {
       const response = await axios.post('https://interview.t-alpha.com.br/api/auth/register', formData);
-      console.log(response.data);
     } catch (error) {
       console.error(error);
     }
@@ -67,23 +66,21 @@ export default function Home() {
 
   const loginSubmit = async (e: any) => {
     e.preventDefault();
-    console.log(entrar)
     try {
       const response = await axios.post('https://interview.t-alpha.com.br/api/auth/login', entrar);
 
-      const newToken =  response.data.data.token;
-      console.log(response.data.data.token);
-      
+      const newToken = response.data.data.token;
+
       addToken(newToken)
 
       if (response.data.success === true) {
         setCorreta(true)
-        
+
         setTimeout(() => {
           setCorreta(false)
           router.push('/Crud')
-        }, 3000)
-        
+        }, 2000)
+
       } else {
         window.prompt('deu errado');
       }
@@ -93,14 +90,14 @@ export default function Home() {
     }
   };
 
-  
+
   /*PRODUTOS*/
 
 
   return (
     <>
-      <div className="bg-gray-100">
-        
+      <div className="bg-gray-300">
+
         <div className="flex justify-center items-center h-screen">
 
           <form className="bg-white shadow-lg rounded px-8 pt-6 pb-8 mb-4" onSubmit={RegistroSubmit}>
@@ -109,17 +106,29 @@ export default function Home() {
               <div>
                 <div className="mb-4">
                   <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="text">
-                  Tax Number
+                    Tax Number
                   </label>
-                  <input className="text-black block border border-gray-300 rounded py-2 px-3 mb-3" type="text" name="taxNumber" value={entrar.taxNumber} onChange={(e) => handleChange(e, "login")} placeholder="Nome" required />
+                  <input
+                    className="text-black block border border-gray-300 rounded py-2 px-3 mb-3"
+                    type="text"
+                    name="taxNumber"
+                    value={entrar.taxNumber} onChange={(e) => handleChange(e, "login")} placeholder="Nome"
+                    required
+                  />
                 </div>
                 <div className="mb-4">
                   <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="senha">
                     Senha
                   </label>
-                  <input className="text-black block border border-gray-300 rounded py-2 px-3 mb-3" type="password" name="password" value={entrar.password} onChange={(e) => handleChange(e, "login")} placeholder="Tax Number" required />
+                  <input
+                    className="text-black block border border-gray-300 rounded py-2 px-3 mb-3"
+                    type="password"
+                    name="password"
+                    value={entrar.password} onChange={(e) => handleChange(e, "login")} placeholder="Tax Number"
+                    required
+                  />
                   {correta &&
-                    <p className="text-black text-center">Senha correta</p>
+                    <p className="text-green-600 text-center">Senha correta</p>
                   }
                   {
                     incorreta &&
@@ -144,32 +153,62 @@ export default function Home() {
                   <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="txNumber">
                     Nome
                   </label>
-                  <input className="text-black block border border-gray-300 rounded py-2 px-3 mb-3" type="text" name="name" value={formData.name} onChange={(e) => handleChange(e, "registro")} placeholder="Nome" required />
+                  <input
+                    className="text-black block border border-gray-300 rounded py-2 px-3 mb-3"
+                    type="text"
+                    name="name"
+                    value={formData.name} onChange={(e) => handleChange(e, "registro")} placeholder="Nome"
+                    required
+                  />
                 </div>
                 <div className="mb-4">
                   <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="taxNumber">
                     Tax Number
                   </label>
-                  <input className="text-black block border border-gray-300 rounded py-2 px-3 mb-3" type="text" name="taxNumber" value={formData.taxNumber} onChange={(e) => handleChange(e, "registro")} placeholder="Tax Number" required />
+                  <input
+                    className="text-black block border border-gray-300 rounded py-2 px-3 mb-3"
+                    type="text"
+                    name="taxNumber"
+                    value={formData.taxNumber} onChange={(e) => handleChange(e, "registro")} placeholder="Tax Number"
+                    required
+                  />
                 </div>
 
                 <div className="mb-4">
                   <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="mail">
                     Email
                   </label>
-                  <input className="text-black block border border-gray-300 rounded py-2 px-3 mb-3" type="email" name="mail" value={formData.mail} onChange={(e) => handleChange(e, "registro")} placeholder="Email" required />
+                  <input
+                    className="text-black block border border-gray-300 rounded py-2 px-3 mb-3"
+                    type="email"
+                    name="mail"
+                    value={formData.mail} onChange={(e) => handleChange(e, "registro")} placeholder="Email"
+                    required
+                  />
                 </div>
                 <div className="mb-4">
                   <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="phone">
                     Telefone
                   </label>
-                  <input className="text-black block border border-gray-300 rounded py-2 px-3 mb-3" type="tel" name="phone" value={formData.phone} onChange={(e) => handleChange(e, "registro")} placeholder="Telefone" required />
+                  <input
+                    className="text-black block border border-gray-300 rounded py-2 px-3 mb-3"
+                    type="tel"
+                    name="phone"
+                    value={formData.phone} onChange={(e) => handleChange(e, "registro")} placeholder="Telefone"
+                    required
+                  />
                 </div>
                 <div className="mb-6">
                   <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="password">
                     Senha
                   </label>
-                  <input className="text-black block border border-gray-300 rounded py-2 px-3 mb-3" type="password" name="password" value={formData.password} onChange={(e) => handleChange(e, "registro")} placeholder="Senha" required />
+                  <input
+                    className="text-black block border border-gray-300 rounded py-2 px-3 mb-3"
+                    type="password"
+                    name="password"
+                    value={formData.password} onChange={(e) => handleChange(e, "registro")} placeholder="Senha"
+                    required
+                  />
                 </div>
                 <div className="flex items-center justify-between">
                   <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" type="submit">
