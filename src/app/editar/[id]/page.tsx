@@ -10,6 +10,8 @@ export default function Editar({ params }: { params: { id: Number } }) {
 
     const token = useTokenStore(state => state.token)
 
+    const [atualizar, setAtualizar] = useState(false);
+
     const [produto, setProduto] = useState<Produto | null>(null)
 
     const getProduto = async () => {
@@ -17,7 +19,7 @@ export default function Editar({ params }: { params: { id: Number } }) {
             const { data } = await axios.get(`https://interview.t-alpha.com.br/api/products/get-one-product/${params.id}`, { headers: { Authorization: `Bearer ${token}` } });
             setProduto(data.data);
         } catch (err) {
-            console.error('Não foi possível buscar o produto');
+            console.log('Não foi possível buscar o produto');
         }
     }
 
@@ -26,10 +28,13 @@ export default function Editar({ params }: { params: { id: Number } }) {
 
         try {
             await axios.patch(`https://interview.t-alpha.com.br/api/products/update-product/${params.id}`, produto, { headers: { Authorization: `Bearer ${token}` } });
-            alert('O produto foi atualizado com sucesso.');
-            router.push('/Crud');
-        } catch (error) {
-            console.error('Não foi possível atualizar o produto.');
+            setAtualizar(true);
+            setTimeout(() => {
+                router.push('/Crud');
+            }, 2000)
+
+        } catch (log) {
+            console.log('Não foi possível atualizar o produto.');
         }
     }
 
@@ -42,10 +47,8 @@ export default function Editar({ params }: { params: { id: Number } }) {
     }, []);
 
     if (produto === null) return (
-    
-    <h1 className="text-center justify-center">Buscando o produto...</h1>
-
-)
+        <h1 className="text-center justify-center">Buscando o produto...</h1>
+    )
 
     return (
         <>
@@ -112,14 +115,14 @@ export default function Editar({ params }: { params: { id: Number } }) {
                                 </div>
 
                             </div>
+                            {atualizar &&
+                                <p className="text-center mt-2 font-semibold text-green-700">O produto foi atualizado com sucesso.</p>
+                            }
+
                         </form>
                     </div>
                 </main>
             </div>
-
-
-
-
         </>
     )
 }

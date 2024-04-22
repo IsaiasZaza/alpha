@@ -4,13 +4,20 @@ import { useEffect, useState } from "react";
 import { useRouter } from 'next/navigation'
 import { useTokenStore } from '../context/auth'
 import { setTimeout } from "timers";
+import { IoAlertCircleSharp } from "react-icons/io5";
+
 export default function Home() {
 
   const addToken = useTokenStore(state => state.setToken)
   const router = useRouter()
-  const [correta, setCorreta] = useState(false)             
 
-  const [incorreta, setIncorreta] = useState(false)         
+  const [correta, setCorreta] = useState(false)
+
+  const [incorreta, setIncorreta] = useState(false)
+
+  const [registroIncorreto, setegistroIncorreto] = useState(false);
+
+  const [usuarioCriado, setUsuarioCriado] = useState(false)
 
 
   const [formData, setFormData] = useState({
@@ -32,13 +39,13 @@ export default function Home() {
 
   const loginIr = (e: any) => {
     e.preventDefault();
-    setRegistro(false)                
+    setRegistro(false)
     setLogin(true)
   }
 
   const registroIr = (e: any) => {
     e.preventDefault();
-    setRegistro(true)                
+    setRegistro(true)
     setLogin(true)
     setLogin(false)
   }
@@ -56,11 +63,33 @@ export default function Home() {
     e.preventDefault();
     try {
       const response = await axios.post('https://interview.t-alpha.com.br/api/auth/register', formData);
+      console.log(response.data)
+
+      if (response.data.success === false) {
+        setegistroIncorreto(true);
+
+        setTimeout(() => {
+          setegistroIncorreto(false)
+        }, 2000)
+      } else if (response.data.success === true) {
+
+        setUsuarioCriado(true);
+        e.target.reset();
+
+        setTimeout(() => {
+          setUsuarioCriado(false)
+          setRegistro(false)
+          setLogin(true)
+        }, 2000)
+
+      }
+
     } catch (error) {
       console.error(error);
-    }
-  };
 
+    }
+
+  };
 
   const loginSubmit = async (e: any) => {
     e.preventDefault();
@@ -79,10 +108,7 @@ export default function Home() {
           router.push('/Crud')
         }, 2000)
 
-      } else {
-        window.prompt('deu errado');
       }
-
     } catch (error) {
       console.log(error);
     }
@@ -134,7 +160,7 @@ export default function Home() {
                   Login
                 </button>
                 <div className="text-center">
-                  <button onClick={registroIr} className="mt-3 font-semibold text-red-400 hover:text-red-800 transition-all">Não possui conta? Clique aqui.</button>
+                  <button onClick={registroIr} className="mt-3 font-semibold text-blue-400 hover:text-blue-800 transition-all">Não possui conta? Clique aqui.</button>
                 </div>
 
               </div>
@@ -209,12 +235,17 @@ export default function Home() {
                     Cadastrar
                   </button>
                 </div>
+                {registroIncorreto &&
+                  <p className="mt-1 text-red-600 font-semibold flex justify-center">Usuario já cadastrado<IoAlertCircleSharp className="text-2xl ml-1" />
+                  </p>
+                }
+                {usuarioCriado &&
+                  <p className="text-center mt-2 font-semibold text-green-700">Usuario criado com sucesso</p>
+                }
                 <div className="text-center mt-2">
-                  <button onClick={loginIr} className="font-semibold text-red-400 hover:text-red-800 transition-all">Fazer Login</button>
-                </div>
-
+                  <button onClick={loginIr} className="font-semibold text-blue-400 hover:text-blue-800 transition-all">Fazer Login</button>
+               </div>
               </div>
-
             }
 
           </form>

@@ -64,7 +64,7 @@ export default function Crud() {
 
   useEffect(() => {
     if (!token) {
-      router.push('/')  /*Caso não exista token - Volta pra tela inicial*/
+      router.push('/') 
       return
     }
     getProdutos();
@@ -144,7 +144,6 @@ export default function Crud() {
                             onClick={() => router.push(`/editar/${item.id}`)}
                             className="text-gray-50 bg-blue-600 hover:bg-blue-900 ml-2 px-2 py-1 rounded-md flex transition-all">Editar<MdModeEdit className="text-2xl" /></button>
                         </div>
-
                         <div>
                           <button
                             onClick={() => deletarProdutos(item.id)}
