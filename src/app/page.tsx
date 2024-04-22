@@ -99,7 +99,6 @@ export default function Home() {
       const newToken = response.data.data.token;
 
       addToken(newToken)
-
       if (response.data.success === true) {
         setCorreta(true)
 
@@ -111,6 +110,10 @@ export default function Home() {
       }
     } catch (error) {
       console.log(error);
+      setTimeout(() => {
+        setIncorreta(true);
+      }, 2000)
+
     }
   };
 
@@ -130,9 +133,9 @@ export default function Home() {
                   </label>
                   <input
                     className="text-black block border border-gray-300 rounded py-2 px-3 mb-3"
-                    type="text"
+                    type="number"
                     name="taxNumber"
-                    value={entrar.taxNumber} onChange={(e) => handleChange(e, "login")} placeholder="TaxNumber"
+                    value={entrar.taxNumber} onChange={(e) => handleChange(e, "login")} placeholder="Tax Number"
                     required
                   />
                 </div>
@@ -187,7 +190,7 @@ export default function Home() {
                   </label>
                   <input
                     className="text-black block border border-gray-300 rounded py-2 px-3 mb-3"
-                    type="text"
+                    type="number"
                     name="taxNumber"
                     value={formData.taxNumber} onChange={(e) => handleChange(e, "registro")} placeholder="Tax Number"
                     required
@@ -244,7 +247,7 @@ export default function Home() {
                 }
                 <div className="text-center mt-2">
                   <button onClick={loginIr} className="font-semibold text-blue-400 hover:text-blue-800 transition-all">Fazer Login</button>
-               </div>
+                </div>
               </div>
             }
 
