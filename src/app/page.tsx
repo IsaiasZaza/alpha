@@ -1,7 +1,6 @@
 "use client"
 import axios from "axios";
 import { useEffect, useState } from "react";
-import Link from "next/link";
 import { useRouter } from 'next/navigation'
 import { useTokenStore } from '../context/auth'
 import { setTimeout } from "timers";
@@ -9,9 +8,9 @@ export default function Home() {
 
   const addToken = useTokenStore(state => state.setToken)
   const router = useRouter()
-  const [correta, setCorreta] = useState(false)             /*Senha Correta*/
+  const [correta, setCorreta] = useState(false)             
 
-  const [incorreta, setIncorreta] = useState(false)         /*Senha Incorreta*/
+  const [incorreta, setIncorreta] = useState(false)         
 
 
   const [formData, setFormData] = useState({
@@ -33,13 +32,13 @@ export default function Home() {
 
   const loginIr = (e: any) => {
     e.preventDefault();
-    setRegistro(false)                 /*IR PARA AREA DE LOGIN*/
+    setRegistro(false)                
     setLogin(true)
   }
 
   const registroIr = (e: any) => {
     e.preventDefault();
-    setRegistro(true)                /*IR PARA AREA DE REGISTRO*/
+    setRegistro(true)                
     setLogin(true)
     setLogin(false)
   }
@@ -53,7 +52,6 @@ export default function Home() {
     }
   };
 
-  /*Registro/Submit*/
   const RegistroSubmit = async (e: any) => {
     e.preventDefault();
     try {
@@ -90,10 +88,6 @@ export default function Home() {
     }
   };
 
-
-  /*PRODUTOS*/
-
-
   return (
     <>
       <div className="bg-gray-300">
@@ -101,7 +95,7 @@ export default function Home() {
         <div className="flex justify-center items-center h-screen">
 
           <form className="bg-white shadow-lg rounded px-8 pt-6 pb-8 mb-4" onSubmit={RegistroSubmit}>
-            <p className="text-black text-center m-3 font-semibold text-lg">Alpha Project</p>
+            <p className="text-gray-500 text-center m-3 font-semibold text-lg">Alpha Project</p>
             {login &&
               <div>
                 <div className="mb-4">
@@ -112,7 +106,7 @@ export default function Home() {
                     className="text-black block border border-gray-300 rounded py-2 px-3 mb-3"
                     type="text"
                     name="taxNumber"
-                    value={entrar.taxNumber} onChange={(e) => handleChange(e, "login")} placeholder="Nome"
+                    value={entrar.taxNumber} onChange={(e) => handleChange(e, "login")} placeholder="TaxNumber"
                     required
                   />
                 </div>
@@ -124,11 +118,11 @@ export default function Home() {
                     className="text-black block border border-gray-300 rounded py-2 px-3 mb-3"
                     type="password"
                     name="password"
-                    value={entrar.password} onChange={(e) => handleChange(e, "login")} placeholder="Tax Number"
+                    value={entrar.password} onChange={(e) => handleChange(e, "login")} placeholder="Senha"
                     required
                   />
                   {correta &&
-                    <p className="text-green-600 text-center">Senha correta</p>
+                    <p className="text-green-600 text-center font-semibold">Senha correta</p>
                   }
                   {
                     incorreta &&
@@ -136,11 +130,11 @@ export default function Home() {
                   }
 
                 </div>
-                <button onClick={loginSubmit} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" type="submit">
+                <button onClick={loginSubmit} className="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" type="submit">
                   Login
                 </button>
-                <div className="text-end">
-                  <button onClick={registroIr} className=" font-semibold text-red-400 hover:text-red-800 transition-all">Registrar-se</button>
+                <div className="text-center">
+                  <button onClick={registroIr} className="mt-3 font-semibold text-red-400 hover:text-red-800 transition-all">Não possui conta? Clique aqui.</button>
                 </div>
 
               </div>
@@ -211,12 +205,12 @@ export default function Home() {
                   />
                 </div>
                 <div className="flex items-center justify-between">
-                  <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" type="submit">
-                    Registrar
+                  <button className="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition-all" type="submit">
+                    Cadastrar
                   </button>
                 </div>
-                <div className="text-end">
-                  <button onClick={loginIr} className="font-semibold text-red-400 hover:text-red-800 transition-all">Ir para o login</button>
+                <div className="text-center mt-2">
+                  <button onClick={loginIr} className="font-semibold text-red-400 hover:text-red-800 transition-all">Fazer Login</button>
                 </div>
 
               </div>

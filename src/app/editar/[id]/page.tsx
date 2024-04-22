@@ -41,13 +41,18 @@ export default function Editar({ params }: { params: { id: Number } }) {
         getProduto();
     }, []);
 
-    if (produto === null) return (<h1>Buscando o produto...</h1>)
+    if (produto === null) return (
+    
+    <h1 className="text-center justify-center">Buscando o produto...</h1>
+
+)
 
     return (
         <>
             <div className="bg-gray-300 min-h-screen flex flex-col items-center justify-center">
                 <main>
                     <div className="max-w-4xl w-full bg-white p-8 rounded-lg shadow-lg">
+                        <h1 className="text-gray-500 text-2xl font-semibold text-center mb-4 ">Alpha Projeto</h1>
                         <form className="mb-4" onSubmit={handleSubmit}>
                             <div className="mb-4">
                                 <label htmlFor="name" className="block text-sm font-medium text-black">Nome do Produto:</label>
@@ -55,7 +60,7 @@ export default function Editar({ params }: { params: { id: Number } }) {
                                     id="name"
                                     type="text"
                                     name="name"
-                                    className="mt-1 block w-full text-black border-gray-400 px-3 py-1 border rounded-md shadow-sm focus:ring-indigo-500 focus:outline-none focus:border-indigo-500"
+                                    className="mt-1 block w-full text-black border-gray-400 px-3 py-1 border rounded-md shadow-sm focus:outline-none focus:border-gray-800 focus:shadow-md"
                                     value={produto.name}
                                     onChange={(event) => setProduto({ ...produto, name: event.currentTarget.value })}
                                     required
@@ -66,7 +71,7 @@ export default function Editar({ params }: { params: { id: Number } }) {
                                 <textarea
                                     id="description"
                                     name="description"
-                                    className="mt-1 block w-full text-black border-gray-400 px-3 py-1 border rounded-md shadow-sm focus:ring-indigo-500 focus:outline-none focus:border-indigo-500"
+                                    className="mt-1 block w-full text-black border-gray-400 px-3 py-1 border rounded-md shadow-sm focus:outline-none focus:border-gray-800 focus:shadow-md"
                                     onChange={(event) => setProduto({ ...produto, description: event.currentTarget.value })}
                                     value={produto.description}
                                     required
@@ -79,7 +84,7 @@ export default function Editar({ params }: { params: { id: Number } }) {
                                         id="price"
                                         type="number"
                                         name="price"
-                                        className="mt-1 block w-full text-black border-gray-400 px-3 py-1 border rounded-md shadow-sm focus:ring-indigo-500 focus:outline-none focus:border-indigo-500"
+                                        className="mt-1 block w-full text-black border-gray-400 px-3 py-1 border rounded-md shadow-sm focus:outline-none focus:border-gray-800 focus:shadow-md"
                                         value={produto.price}
                                         onChange={(event) => setProduto({ ...produto, price: Number(event.currentTarget.value) })}
                                         required
@@ -91,7 +96,7 @@ export default function Editar({ params }: { params: { id: Number } }) {
                                         id="stock"
                                         type="number"
                                         name="stock"
-                                        className="mt-1 block w-full text-black border-gray-400 px-3 py-1 border rounded-md shadow-sm focus:ring-indigo-500 focus:outline-none focus:border-indigo-500"
+                                        className="mt-1 block w-full text-black border-gray-400 px-3 py-1 border rounded-md shadow-sm focus:outline-none focus:border-gray-800 focus:shadow-md"
                                         value={produto.stock}
                                         onChange={(event) => setProduto({ ...produto, stock: Number(event.currentTarget.value) })}
                                         required
@@ -103,7 +108,7 @@ export default function Editar({ params }: { params: { id: Number } }) {
                                     <button onClick={handleVoltar} type="reset" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-2">Voltar</button>
                                 </div>
                                 <div>
-                                    <button type="submit" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Salvar</button>
+                                    <button type="submit" className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">Salvar</button>
                                 </div>
 
                             </div>
@@ -113,10 +118,7 @@ export default function Editar({ params }: { params: { id: Number } }) {
             </div>
 
 
-            <h1>O produto com nome: {produto.name}</h1>
-            <h1>O produto com descrição: {produto.description}</h1>
-            <h1>O produto com stock: {produto.stock}</h1>
-            <h1>O produto com preço: {produto.price}</h1>
+
 
         </>
     )

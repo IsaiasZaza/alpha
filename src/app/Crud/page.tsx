@@ -76,14 +76,14 @@ export default function Crud() {
     <>
       <div className="bg-gray-300 min-h-screen flex flex-col items-center justify-center">
         <main className="max-w-4xl w-full bg-white p-8 rounded-lg shadow-lg">
-          <h1 className="text-3xl font-semibold text-center mb-4">Alpha Projeto CRUD</h1>
+          <h1 className="text-gray-500 text-3xl font-semibold text-center mb-4 ">Alpha Projeto CRUD</h1>
           <form className="mb-4" onSubmit={criarProduto}>
             <div className="mb-4">
               <label htmlFor="name" className="block text-sm font-medium text-black">Nome do Produto:</label>
               <input
                 type="text"
                 id="name" name="name"
-                className="mt-1 block w-full text-black border-gray-400 px-3 py-1 border rounded-md shadow-sm focus:ring-indigo-500 focus:outline-none focus:border-indigo-500"
+                className="mt-1 block w-full text-black border-gray-400 px-3 py-1 border rounded-md shadow-sm focus:outline-none focus:border-gray-800 focus:shadow-md"
               />
             </div>
             <div className="mb-4">
@@ -91,7 +91,7 @@ export default function Crud() {
               <textarea
                 id="description"
                 name="description"
-                className="mt-1 block w-full text-black border-gray-400 px-3 py-1 border rounded-md shadow-sm focus:ring-indigo-500 focus:outline-none focus:border-indigo-500">
+                className="mt-1 block w-full text-black border-gray-400 px-3 py-1 border rounded-md shadow-sm focus:outline-none focus:border-gray-800 focus:shadow-md">
               </textarea>
             </div>
             <div className="mb-4 grid grid-cols-2 gap-4">
@@ -101,7 +101,7 @@ export default function Crud() {
                   id="price"
                   type="number"
                   name="price"
-                  className="mt-1 block w-full text-black border-gray-400 px-3 py-1 border rounded-md shadow-sm focus:ring-indigo-500 focus:outline-none focus:border-indigo-500"
+                  className="mt-1 block w-full text-black border-gray-400 px-3 py-1 border rounded-md shadow-sm focus:outline-none focus:border-gray-800 focus:shadow-md"
                 />
               </div>
               <div>
@@ -110,12 +110,12 @@ export default function Crud() {
                   id="stock"
                   type="number"
                   name="stock"
-                  className="mt-1 block w-full text-black border-gray-400 px-3 py-1 border rounded-md shadow-sm focus:ring-indigo-500 focus:outline-none focus:border-indigo-500"
+                  className="mt-1 block w-full text-black border-gray-400 px-3 py-1 border rounded-md shadow-sm focus:outline-none focus:border-gray-800 focus:shadow-md"
                 />
               </div>
             </div>
             <div className="text-end">
-              <button type="submit" className="w-full bg-indigo-600 text-white py-2 px-4 rounded-md hover:bg-indigo-700">Salvar</button>
+              <button type="submit" className="w-full bg-indigo-600 text-white py-2 px-4 rounded-md hover:bg-indigo-800 transition-all">Salvar</button>
             </div>
           </form>
 
@@ -148,11 +148,9 @@ export default function Crud() {
                         <div>
                           <button
                             onClick={() => deletarProdutos(item.id)}
-                            className="text-gray-50 bg-red-600 hover:bg-red-900 ml-2 px-2 py-1 rounded-md flex transition-all">Excluir<MdDelete className="text-2xl"/></button>
+                            className="text-gray-50 bg-red-600 hover:bg-red-900 ml-2 px-2 py-1 rounded-md flex transition-all">Excluir<MdDelete className="text-2xl" /></button>
                         </div>
                       </div>
-
-
                     </td>
                   </tr>
                 ))}
