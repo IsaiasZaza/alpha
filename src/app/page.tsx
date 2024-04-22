@@ -110,8 +110,10 @@ export default function Home() {
       }
     } catch (error) {
       console.log(error);
+      setIncorreta(true);
+      
       setTimeout(() => {
-        setIncorreta(true);
+        setIncorreta(false)
       }, 2000)
 
     }
