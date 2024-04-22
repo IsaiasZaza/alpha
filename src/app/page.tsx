@@ -22,7 +22,7 @@ export default function Home() {
 
   const [formData, setFormData] = useState({
     name: '',
-    taxNumber: '',
+    taxNumber: Number,
     mail: '',
     phone: '',
     password: ''
@@ -186,8 +186,6 @@ export default function Home() {
                     name="name"
                     value={formData.name} onChange={(e) => handleChange(e, "registro")} placeholder="Nome"
                     required
-                    minLength={6}
-                    maxLength={10}
                   />
                 </div>
                 <div className="mb-4">
@@ -200,8 +198,6 @@ export default function Home() {
                     name="taxNumber"
                     value={formData.taxNumber} onChange={(e) => handleChange(e, "registro")} placeholder="Tax Number"
                     required
-                    minLength={7}
-                    maxLength={10}
                   />
                 </div>
 
