@@ -1,8 +1,6 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-## Getting Started
 
-First, run the development server:
+## Alpha Project
 
 ```bash
 npm run dev
@@ -14,23 +12,24 @@ pnpm dev
 bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Abre em: [http://localhost:3000](http://localhost:3000) 
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+##Projeto CRUD com React, Next.js e Tailwind CSS
 
-## Learn More
+Este projeto é um CRUD (Create, Read, Update, Delete) básico desenvolvido com React.js, Next.js e Tailwind CSS. Ele permite a criação, leitura, atualização e exclusão de produtos em um sistema de gerenciamento de estoque.
 
-To learn more about Next.js, take a look at the following resources:
+Tecnologias Utilizadas
+React.js: Biblioteca JavaScript para construção de interfaces de usuário.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Next.js: Framework React para renderização do lado do servidor e construção de aplicativos da web modernos.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+Tailwind CSS: Framework de CSS utilitário para design responsivo e ágil.
 
-## Deploy on Vercel
+Zustand: Biblioteca para gerenciamento de estado global em aplicações React.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+##Funcionalidades
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+CRUD de Produtos: Criação, leitura, atualização e exclusão de produtos.
+Interface Responsiva: Design adaptável para uma experiência de usuário consistente em dispositivos de diferentes tamanhos.
+Autenticação de Token: Utilização do Zustand para gerenciamento do token de autenticação.
